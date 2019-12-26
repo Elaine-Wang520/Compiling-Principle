@@ -1,0 +1,14 @@
+void main()
+{
+  int c=1000;
+  int a=5;
+  int b=6;
+  while (c>=500 && c!=12 || c>4) 
+        {
+                if(a>3) 
+                        c = c+500; 
+                if(c<4) 
+                        if (a>b || c<1) 
+                                a=1; 
+         }
+}

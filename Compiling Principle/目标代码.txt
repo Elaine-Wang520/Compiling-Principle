@@ -1,0 +1,147 @@
+assume cs:code,ds:data,ss:stack,es:extended
+extended segment
+	db 1024 dup (0)
+extended ends
+stack segment
+	db 1024 dup (0)
+stack ends
+data segment
+	_buff_p db 256 dup (24h)
+	_buff_s db 256 dup (0)
+	_msg_p db 0ah,'Output:',0
+	_msg_s db 0ah,'Input:',0
+	_a dw 0
+	_T1 dw 0
+	_T2 dw 0
+data ends
+code segment
+start:mov ax,extended
+		mov es,ax
+		mov ax,stack
+		mov ss,ax
+		mov sp,1024
+		mov bp,sp
+		mov ax,data
+		mov ds,ax
+		
+_1:mov ax, 2
+mov ds:[_a],ax
+_2:mov ax, 2
+mov ds:[_b],ax
+_3:mov ax,2
+mov bx,3
+mul bx
+mov [_T1],ax
+_4:mov ax, 1
+add ax,[_T1]
+mov [_T2],ax
+_5:mov ax, 4
+add ax,5
+mov [_T3],ax
+_6:MOV  AX,T3
+MOV  DX,0
+MOV  AX,6
+DIV  BX
+MOV  T4,DX
+_7:mov ax,[_T2]
+add ax,[_T4]
+mov [_T5],ax
+_8:mov ax,ds:[_T5]
+mov ds:[_c],ax
+_9:mov ax,[_a]
+add ax,[_b]
+mov [_T6],ax
+_10:MOV DX,1
+MOV  AX,T6
+CMP	 AX,c
+JB_LT
+MOV  DX,0
+	_LT:MOV  M,DX
+	MOV AX,M
+	CMP AX,0
+	JE_EZ
+	JMP far ptr  13
+	_EZ:NOP
+_11:mov ax,[_a]
+add ax,[_b]
+mov [_T7],ax
+_12:mov ax,ds:[_T7]
+mov ds:[_a],ax
+_13:mov ax, 1000
+mov ds:[_c],ax
+_14:mov dx,1
+mov bx,ds:[_c]
+cmp ax,500
+jnb _14_n
+mov dx,0
+_14_n:mov es:[4],dx
+_15:mov ax,es:[4]
+cmp ax,0
+jne n
+jmp far ptr _19
+n:nop
+MOV DX,1
+MOV  AX,c
+CMP  AX,12
+JNE_NE
+MOV  DX,0
+_NE:MOV  M,DX
+MOV AX,M
+CMP AX,0
+JE_EZ
+JMP far ptr  23
+_EZ:NOP
+MOV DX,1
+MOV  AX,c
+CMP  AX,4
+JA_GT
+MOV  DX,0
+_GT:MOV  M,DX
+MOV AX,M
+CMP AX,0
+JE_EZ
+JMP far ptr  23
+_EZ:NOP
+MOV DX,1
+MOV  AX,a
+CMP  AX,3
+JA_GT
+MOV  DX,0
+_GT:MOV  M,DX
+MOV AX,M
+CMP AX,0
+JE_EZ
+JMP far ptr  25
+_EZ:NOP
+_16:mov ax,[_c]
+add ax,500
+mov [_T8],ax
+_17:mov ax,ds:[_T8]
+mov ds:[_c],ax
+_18:mov ax, 1
+mov ds:[_a],ax
+_19:MOV DX,1
+MOV  AX,a
+CMP	 AX,9
+JB_LT
+MOV  DX,0
+	_LT:MOV  M,DX
+	MOV AX,M
+	CMP AX,0
+	JE_EZ
+	JMP far ptr  33
+	_EZ:NOP
+_20:mov ax,[_a]
+add ax,1
+mov [_T9],ax
+_21:mov ax,[_a]
+add ax,2
+mov [_T10],ax
+_22:mov ax,ds:[_T10]
+mov ds:[_a],ax
+MOV  SP,BP
+POP  BP
+RET
+
+code ends
+end start

@@ -1,0 +1,11 @@
+void main()
+{ 
+       int a=1;
+       int w=2;
+       a=w-a;
+      do
+     {
+         a=a+1;	
+         w=w-4;
+     }while(w<5);
+}
